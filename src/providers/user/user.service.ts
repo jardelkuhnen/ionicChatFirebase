@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AngularFire, FirebaseListObservable } from 'angularFire2';
-
+import { BaseService } from '../base.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class UserService {
+export class UserService extends BaseService{
 
   users: FirebaseListObservable<User[]>;
 
@@ -14,11 +15,25 @@ export class UserService {
     public af: AngularFire,
     public http: Http 
     ) {
+      super();
       this.users = this.af.database.list(`/users`);
   }
   
   create(user: User): firebase.Promise<void>{
-      return this.users.push(user);
+      return this.af.database.object(`/users/${user.uid}`).set(user).catch(this.handlePromiseError);
+  }
+
+  userExists(userName: string): Observable<boolean>{
+     return this.af.database.list(`/users`, {
+        query: {
+          orderByChild: 'username',
+          equalTo: userName
+      
+        } 
+    }).map((users: User[])=> {
+        return userName.length > 0;
+    }).catch(this.handleObservableError);
+   
   }
 
 }

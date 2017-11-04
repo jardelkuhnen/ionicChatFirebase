@@ -1,6 +1,4 @@
 import { HttpModule } from '@angular/http';
-import { UserService } from './../providers/user/user.service';
-import { SignupPage } from './../pages/signup/signup';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -9,9 +7,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { SignupPage } from './../pages/signup/signup';
+import { AuthService } from './../providers/auth/auth.service';
+import { UserService } from './../providers/user/user.service';
 
 import { AngularFireModule, FirebaseAppConfig } from 'angularFire2';
-import { UserProvider } from '../providers/user/user';
+
 
   const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyBpbZxY4wSi3kkZFRSzTcJAR4JShbcXqq0",
@@ -45,6 +46,7 @@ import { UserProvider } from '../providers/user/user';
     UserService,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthService,
   ]
 })
 export class AppModule {}
