@@ -20,4 +20,11 @@ export class AuthService extends BaseService{
       .catch(this.handlePromiseError);
   }
 
+  signWithEmail(user: {email: string, password: string}): firebase.Promise<Boolean> {
+    return this.auth.login(user).then((authState: FirebaseAuthState) =>{
+        return authState != null;
+    }).catch(this.handlePromiseError);
+
+  }
+
 }

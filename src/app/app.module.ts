@@ -1,3 +1,4 @@
+import { SigninPage } from './../pages/signin/signin';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -11,7 +12,7 @@ import { SignupPage } from './../pages/signup/signup';
 import { AuthService } from './../providers/auth/auth.service';
 import { UserService } from './../providers/user/user.service';
 
-import { AngularFireModule, FirebaseAppConfig } from 'angularFire2';
+import { AngularFireModule, FirebaseAppConfig, AuthProviders, AuthMethods } from 'angularFire2';
 
 
   const firebaseAppConfig: FirebaseAppConfig = {
@@ -22,23 +23,30 @@ import { AngularFireModule, FirebaseAppConfig } from 'angularFire2';
     messagingSenderId: "203280769797"
   };
 
+  const firebaseAuthConfig = {
+    provider: AuthProviders.Custom,
+    method: AuthMethods.Password
+  }
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    SigninPage,
     SignupPage,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseAppConfig)
+    AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    SignupPage
+    SignupPage,
+    SigninPage
 
   ],
   providers: [
