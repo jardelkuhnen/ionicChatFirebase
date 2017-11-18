@@ -23,6 +23,7 @@ export class ChatPage {
   }
 
   sendMessage(newMessage: string): void{
+    console.log(newMessage);
      this.messages.push(newMessage); 
   }
 
