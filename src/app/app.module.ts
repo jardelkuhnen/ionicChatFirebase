@@ -1,3 +1,5 @@
+import { CapitalizePipe } from './../pipes/capitalize.pipe';
+import { CustomLoggedHeaderComponent } from './../components/custom-logged-header/custom-logged-header.component';
 import { ChatPage } from './../pages/chat/chat';
 import { SigninPage } from './../pages/signin/signin';
 import { HttpModule } from '@angular/http';
@@ -14,6 +16,7 @@ import { AuthService } from './../providers/auth/auth.service';
 import { UserService } from './../providers/user/user.service';
 
 import { AngularFireModule, FirebaseAppConfig, AuthProviders, AuthMethods } from 'angularFire2';
+import { ChatService } from '../providers/chat/chat.service';
 
 
   const firebaseAppConfig: FirebaseAppConfig = {
@@ -31,6 +34,8 @@ import { AngularFireModule, FirebaseAppConfig, AuthProviders, AuthMethods } from
 
 @NgModule({
   declarations: [
+    CapitalizePipe,
+    CustomLoggedHeaderComponent,
     MyApp,
     HomePage,
     ChatPage,
@@ -58,6 +63,7 @@ import { AngularFireModule, FirebaseAppConfig, AuthProviders, AuthMethods } from
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
+    ChatService,
   ]
 })
 export class AppModule {}
