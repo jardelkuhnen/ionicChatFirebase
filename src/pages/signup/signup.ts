@@ -1,10 +1,10 @@
+import { HomePage } from './../home/home';
 import { FirebaseAuthState } from 'angularFire2';
-import { User } from './../../models/user.model';
 import { AuthService } from './../../providers/auth/auth.service';
 import { UserService } from './../../providers/user/user.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/first';
 
 @Component({
@@ -52,10 +52,12 @@ export class SignupPage {
           }).then((authState: FirebaseAuthState) => {
 
             delete formUser.password;
-            formUser.uid = authState.auth.uid;
-
-            this.userService.create(formUser).then(() => {
+            let uuid: string = authState.auth.uid;
+            
+            this.userService.create(formUser, uuid)
+              .then(() => {
               console.log('Usuario Cadastrado!');
+              this.navCtrl.setRoot(HomePage);
               loading.dismiss();
             }).catch((error: any) => {
               console.log();

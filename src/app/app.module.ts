@@ -1,3 +1,4 @@
+import { ChatPage } from './../pages/chat/chat';
 import { SigninPage } from './../pages/signin/signin';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,7 +33,8 @@ import { AngularFireModule, FirebaseAppConfig, AuthProviders, AuthMethods } from
   declarations: [
     MyApp,
     HomePage,
-    SigninPage,
+    ChatPage,
+    SigninPage, 
     SignupPage,
   ],
   imports: [
@@ -44,6 +46,7 @@ import { AngularFireModule, FirebaseAppConfig, AuthProviders, AuthMethods } from
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    ChatPage,
     HomePage,
     SignupPage,
     SigninPage

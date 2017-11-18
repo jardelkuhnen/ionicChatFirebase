@@ -19,8 +19,8 @@ export class UserService extends BaseService{
       this.users = this.af.database.list(`/users`);
   }
   
-  create(user: User): firebase.Promise<void>{
-      return this.af.database.object(`/users/${user.uid}`).set(user).catch(this.handlePromiseError);
+  create(user: User, uuid: string): firebase.Promise<void>{
+      return this.af.database.object(`/users/${uuid}`).set(user).catch(this.handlePromiseError);
   }
 
   userExists(userName: string): Observable<boolean>{
@@ -28,10 +28,9 @@ export class UserService extends BaseService{
         query: {
           orderByChild: 'username',
           equalTo: userName
-      
         } 
     }).map((users: User[])=> {
-        return userName.length > 0;
+        return users.length > 0;
     }).catch(this.handleObservableError);
    
   }
