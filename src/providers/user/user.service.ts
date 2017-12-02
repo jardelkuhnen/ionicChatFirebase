@@ -55,4 +55,9 @@ export class UserService extends BaseService{
    
   }
 
+  getUser(userId: string): FirebaseObjectObservable<User>{
+    return <FirebaseObjectObservable<User>>this.af.database.list(`/users/${userId}`)
+    .catch(this.handleObservableError);
+  }
+
 }

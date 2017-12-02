@@ -2,7 +2,7 @@ import { UserService } from './../../providers/user/user.service';
 import { User } from './../../models/user.model';
 import { AuthService } from './../../providers/auth/auth.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 
 @Component({
